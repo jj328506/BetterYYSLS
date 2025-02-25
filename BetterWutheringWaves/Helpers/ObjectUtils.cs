@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 
 namespace YYSLS.Helpers;
 
@@ -7,27 +7,11 @@ public class ObjectUtils
 {
     public static byte[] Serialize(object obj)
     {
-        var ms = new MemoryStream();
-        var formatter = new BinaryFormatter();
-#pragma warning disable SYSLIB0011
-        formatter.Serialize(ms, obj);
-#pragma warning restore SYSLIB0011
-        byte[] bytes = ms.GetBuffer();
-        return bytes;
+        return JsonSerializer.SerializeToUtf8Bytes(obj);
     }
 
-    public static object Deserialize(byte[] bytes)
+    public static T Deserialize<T>(byte[] bytes)
     {
-        //利用传来的byte[]创建一个内存流
-        var ms = new MemoryStream(bytes)
-        {
-            Position = 0
-        };
-        var formatter = new BinaryFormatter();
-#pragma warning disable SYSLIB0011
-        var obj = formatter.Deserialize(ms); //把内存流反序列成对象
-#pragma warning restore SYSLIB0011
-        ms.Close();
-        return obj;
+        return JsonSerializer.Deserialize<T>(bytes);
     }
 }
