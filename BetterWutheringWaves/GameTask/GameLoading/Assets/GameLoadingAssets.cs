@@ -8,6 +8,7 @@ public class GameLoadingAssets : BaseAssets<GameLoadingAssets>
 {
     public RecognitionObject EnterGameRo;
     public RecognitionObject WelkinMoonRo;
+    public RecognitionObject LoginRo;
 
     private GameLoadingAssets()
     {
@@ -20,13 +21,22 @@ public class GameLoadingAssets : BaseAssets<GameLoadingAssets>
         //     DrawOnWindow = false
         // }.InitTemplate();
         //
-        // WelkinMoonRo = new RecognitionObject
-        // {
-        //     Name = "WelkinMoon",
-        //     RecognitionType = RecognitionTypes.TemplateMatch,
-        //     TemplateImageMat = GameTaskManager.LoadAssetImage("GameLoading", "welkin_moon_logo.png"),
-        //     RegionOfInterest = new Rect(0, CaptureRect.Height / 2, CaptureRect.Width, CaptureRect.Height / 2),
-        //     DrawOnWindow = false
+         //WelkinMoonRo = new RecognitionObject
+         //{
+           ///  Name = "WelkinMoon",
+            // RecognitionType = RecognitionTypes.TemplateMatch,
+            // TemplateImageMat = GameTaskManager.LoadAssetImage("GameLoading", "jryx.png"),
+            // RegionOfInterest = new Rect(0, CaptureRect.Height / 2, CaptureRect.Width, CaptureRect.Height / 2),
+            // DrawOnWindow = false
         // }.InitTemplate();
+
+        LoginRo = new RecognitionObject
+        {
+            Name = "LoginButton",
+            RecognitionType = RecognitionTypes.TemplateMatch,
+            TemplateImageMat = GameTaskManager.LoadAssetImage("GameLoading", "login_button.png"), // 根据实际路径修改
+            RegionOfInterest = new Rect(0, 0, CaptureRect.Width, 100), // 根据按钮实际位置调整ROI
+            DrawOnWindow = false
+        }.InitTemplate();
     }
 }

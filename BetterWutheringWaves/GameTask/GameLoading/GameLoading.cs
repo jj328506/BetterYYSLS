@@ -4,8 +4,9 @@ using YYSLS.Helpers;
 using System;
 using System.Diagnostics;
 using YYSLS.Core.Simulator;
+using YYSLS.GameTask;
 
-namespace YYSLS.GameTask.GameLoading;
+namespace BetterYYSLS.GameTask.GameLoading;
 
 public class GameLoadingTrigger : ITaskTrigger
 {
@@ -67,6 +68,23 @@ public class GameLoadingTrigger : ITaskTrigger
         {
             IsEnabled = false;
             return;
+        }
+
+        //进入游戏
+        using var loginRa = content.CaptureRectArea.Find(_assets.LoginRo);
+        if (!loginRa.IsEmpty())
+        {
+            // 点击登录按钮中心坐标
+            _postMessageSimulator?.LeftButtonClick();
+            Simulation.SendInput.Mouse.LeftButtonClick();
+            _enterGameClickCount++;
+
+            // 调试日志
+            Debug.WriteLine($"[Login] 点击登录按钮坐标 ");
+
+            // 重置计数器（可选）
+            _enterGameClickCount = 0;
+            return; // 阻止后续逻辑执行
         }
 
         using var ra = content.CaptureRectArea.Find(_assets.EnterGameRo);

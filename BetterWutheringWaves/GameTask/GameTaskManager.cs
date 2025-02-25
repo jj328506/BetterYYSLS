@@ -12,6 +12,7 @@ using OpenCvSharp;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BetterYYSLS.GameTask.GameLoading;
 
 namespace YYSLS.GameTask;
 
@@ -28,7 +29,7 @@ internal class GameTaskManager
         ReloadAssets();
         TriggerDictionary = new Dictionary<string, ITaskTrigger>()
         {
-            // { "GameLoading", new GameLoadingTrigger() },
+            { "GameLoading", new GameLoadingTrigger() },
             // { "AutoPick", new AutoPick.AutoPickTrigger() },
             { "AutoSkip", new AutoSkip.AutoSkipTrigger() },
         };
